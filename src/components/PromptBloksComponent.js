@@ -1,9 +1,6 @@
 import React from 'react';
-import {Button, Card, Collapse, Icon, Input, List, Select} from "antd";
+import {Button, Card, Collapse, Icon, List} from "antd";
 
-const {Option} = Select;
-
-const {Search} = Input;
 
 const {Panel} = Collapse;
 
@@ -18,7 +15,7 @@ export class PromptBloksComponent extends React.Component {
         })
     }
 
-     choosePrompt(item, i) {
+    choosePrompt(item, i) {
         this.props.Carousel.goToSlide(i)
         // this.setState(item)
         this.props.parentUpdateState({
@@ -52,32 +49,33 @@ export class PromptBloksComponent extends React.Component {
                         >
                             <Panel key={1} header={block.title}>
 
-                                {this.props.props.blockChosen == true ?
+                                {this.props.props.blockChosen === true ?
                                     <div>
-                                       <Button style={{marginTop: 10, width: '100%', height: 50}}>Create New Prompt</Button>
-                                    <List
-                                        style={{marginTop: "10px"}}
-                                        itemLayout="horizontal"
-                                        dataSource={this.props.props.blockInfo.promptInfo.length > 0 ? this.props.props.blockInfo.promptInfo : null}
-                                        bordered={true}
-                                        renderItem={(item, i) => (
-                                            <List.Item key={i}>
-                                                <List.Item.Meta
-                                                    title={item.title}
+                                        <Button style={{marginTop: 10, width: '100%', height: 50}}>Create New
+                                            Prompt</Button>
+                                        <List
+                                            style={{marginTop: "10px"}}
+                                            itemLayout="horizontal"
+                                            dataSource={this.props.props.blockInfo.promptInfo.length > 0 ? this.props.props.blockInfo.promptInfo : null}
+                                            bordered={true}
+                                            renderItem={(item, i) => (
+                                                <List.Item key={i}>
+                                                    <List.Item.Meta
+                                                        title={item.title}
 
 
-                                                />
-                                                <Icon style={{fontSize: 26,padding:3}} type="mobile"/>
-                                                <Icon style={{fontSize: 26,padding:3}} type="copy"/>
-                                                <Icon style={{fontSize: 26,padding:3}} type="edit"/>
-                                                <Icon style={{fontSize: 26,padding:3}} type="delete"/>
-                                                <Icon style={{fontSize: 26,padding:3}} type="branches"
-                                                    onClick={()=>this.choosePrompt(item,2)}
-                                                />
-                                            </List.Item>
+                                                    />
+                                                    <Icon style={{fontSize: 26, padding: 3}} type="mobile"/>
+                                                    <Icon style={{fontSize: 26, padding: 3}} type="copy"/>
+                                                    <Icon style={{fontSize: 26, padding: 3}} type="edit"/>
+                                                    <Icon style={{fontSize: 26, padding: 3}} type="delete"/>
+                                                    <Icon style={{fontSize: 26, padding: 3}} type="branches"
+                                                          onClick={() => this.choosePrompt(item, 2)}
+                                                    />
+                                                </List.Item>
 
-                                        )}
-                                    />
+                                            )}
+                                        />
                                     </div>
                                     : null}
 

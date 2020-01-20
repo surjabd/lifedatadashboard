@@ -1,9 +1,9 @@
 import React from 'react';
-import {Breadcrumb, Col, Icon, Layout, Menu, Row} from 'antd';
+import {Col, Icon, Layout, Menu, Row} from 'antd';
 import {menuJsonData} from "../json_data/MenuJsonData";
 import {userLoginJson} from "../json_data/UserLoginJson";
 import {Route, Switch, withRouter} from 'react-router-dom'
-import {LifePakLayoutComponent, updateParentState} from "./LifePakLayoutComponent";
+import {LifePakLayoutComponent} from "./LifePakLayoutComponent";
 
 const {Header, Sider, Content} = Layout;
 const {SubMenu} = Menu;
@@ -38,10 +38,6 @@ class MainLayoutComponent extends React.Component {
         this.props.history.push((url.replace(/\s/g, '')))
     }
 
-    // updateChildState(item) {
-    //     this.setState(item)
-    //     updateParentState(item)
-    // }
 
     render() {
         return (
@@ -135,8 +131,6 @@ class MainLayoutComponent extends React.Component {
                     </Header>
 
 
-
-
                     <Content
                         style={{
                             margin: '0px 12px 0px 12px',
@@ -149,7 +143,7 @@ class MainLayoutComponent extends React.Component {
                             <Route exact path="/">Landing Page</Route>
                             <Route path="/Dashboards">Dashboard</Route>
                             <Route path="/LifePak"><LifePakLayoutComponent props={this.state}
-                                                                           />
+                            />
                             </Route>
                         </Switch>
 

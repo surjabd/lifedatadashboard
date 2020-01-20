@@ -1,9 +1,7 @@
 import React from 'react';
-import {Card, Collapse, Icon, Input, List, Select} from "antd";
+import {Card, Collapse, Icon, List} from "antd";
 
-const {Option} = Select;
 
-const {Search} = Input;
 const {Panel} = Collapse;
 
 
@@ -17,8 +15,8 @@ export class SessionDefinitionComponent extends React.Component {
         // this.setState(item)
         this.props.parentUpdateState({
             sessionChosen: true,
-            blockChosen:false,
-            promptChosen:false,
+            blockChosen: false,
+            promptChosen: false,
             sessionInfo: item
         })
     }
@@ -43,7 +41,7 @@ export class SessionDefinitionComponent extends React.Component {
                             expandIconPosition={"right"}
 
                         >
-                            <Panel key={1} header="Startup Session"extra={<Icon type="plus"/>}>
+                            <Panel key={1} header="Startup Session" extra={<Icon type="plus"/>}>
 
                                 <List
                                     style={{marginTop: "10px"}}
@@ -64,7 +62,7 @@ export class SessionDefinitionComponent extends React.Component {
                                     )}
                                 />
                             </Panel>
-                            <Panel key={2} header="Notification Initiated Session (NIS)"extra={<Icon type="plus"/>}>
+                            <Panel key={2} header="Notification Initiated Session (NIS)" extra={<Icon type="plus"/>}>
                                 <List
                                     style={{marginTop: "10px"}}
                                     itemLayout="horizontal"
@@ -84,7 +82,7 @@ export class SessionDefinitionComponent extends React.Component {
                                     )}
                                 />
                             </Panel>
-                            <Panel key={3} header="User Initiated Session (UIS)"extra={<Icon type="plus"/>}>
+                            <Panel key={3} header="User Initiated Session (UIS)" extra={<Icon type="plus"/>}>
                                 <List
                                     style={{marginTop: "10px"}}
                                     itemLayout="horizontal"
