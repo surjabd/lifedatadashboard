@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import {LifePakCardComponent} from "./LifePakCardComponent";
 import {SessionDefinitionComponent} from "./SessionDefinationComponent";
 import {PromptBloksComponent} from "./PromptBloksComponent";
+import {BranchComponent} from "./BranchComponent";
 import {Breadcrumb, Card} from "antd";
 
 export function updateParentState(item) {
@@ -26,19 +27,21 @@ export class LifePakLayoutComponent extends React.Component {
         this.state = {
             pakChosen: "",
             sessionChosen: "",
-            promptChosen: "",
             pakInfo: "",
-            sessionInfo:"",
-            pakName: "",
-            branchChosen: false
+            sessionInfo: "",
+            blockChosen: "",
+            blockInfo: "",
+            promptChosen: "",
+            promptInfo: ""
         }
-        updateParentState = updateParentState.bind(this)
+
 
     }
 
-    choosePak(item) {
+    setPakLayoutState(item) {
         // console.log(item)
-        this.setState(item, () => console.log(this.state))
+        this.setState(item)
+        console.log(item)
 
     }
 
@@ -57,21 +60,43 @@ export class LifePakLayoutComponent extends React.Component {
                     ,
                 }}>
                     <Breadcrumb.Item>
-                        <a onClick={() => this.setState({pakChosen: false, sessionChosen:false,promptChosen:false},()=>this.Carousel.goToSlide(0))}>LifePak Home</a>
+                        <a onClick={() => this.setState({
+                            pakChosen: false,
+                            sessionChosen: false,
+                            blockChosen:false,
+                            promptChosen: false,
+
+                        }, () => this.Carousel.goToSlide(0))}>LifePak Home</a>
                     </Breadcrumb.Item>
                     {this.state.pakChosen === true ?
                         <Breadcrumb.Item>
-                            <a onClick={() => this.setState({sessionChosen:false,promptChosen:false},()=>this.Carousel.goToSlide(1))}>{this.state.pakName}</a>
+                            <a onClick={() => this.setState({
+                                // sessionChosen: false,
+                                // blockChosen:false,
+                                // promptChosen: false
+                            }, () => (this.Carousel.goToSlide(0)))}>{this.state.pakInfo.title}</a>
                         </Breadcrumb.Item> : null}
 
                     {this.state.pakChosen === true && this.state.sessionChosen === true ?
                         <Breadcrumb.Item>
-                            <a href="">Application Center</a>
+                          <a onClick={() => this.setState({
+                                // promptChosen: false
+                            }, () => this.Carousel.goToSlide(1))}>{this.state.sessionInfo.title}</a>
                         </Breadcrumb.Item> : null}
 
-                    {this.state.pakChosen === true && this.state.sessionChosen === true && this.state.promptChosen === true ?
+                    {this.state.pakChosen === true && this.state.sessionChosen === true && this.state.blockChosen === true ?
                         <Breadcrumb.Item>
-                            <a href="">Application Center</a>
+                           <a onClick={() => this.setState({
+                                // promptChosen: false
+                            }, () => this.Carousel.goToSlide(2))}>{this.state.blockInfo.title}</a>
+                        </Breadcrumb.Item> : null}
+
+
+                    {this.state.pakChosen === true && this.state.sessionChosen === true && this.state.blockChosen === true  && this.state.promptChosen ===true?
+                        <Breadcrumb.Item>
+                           <a onClick={() => this.setState({
+                                // promptChosen: false
+                            }, () => this.Carousel.goToSlide(3))}>{this.state.promptInfo.title}</a>
                         </Breadcrumb.Item> : null}
                 </Breadcrumb>
                 <Carousel style={{height: "83vh", textAlign: "left", flex: "1 1 auto", background: "grey"}}
@@ -85,14 +110,18 @@ export class LifePakLayoutComponent extends React.Component {
                 >
 
                     <div>
-                        <LifePakCardComponent parentUpdateState={(item) => this.choosePak(item)}/>
+                        <LifePakCardComponent parentUpdateState={(item) => this.setPakLayoutState(item)}/>
                     </div>
                     <div>   {this.state.pakChosen === true ?
                         <SessionDefinitionComponent props={this.state} Carousel={this.Carousel}
-                                                    parentUpdateState={(item) => this.choosePak(item)}/> : null}</div>
+                                                    parentUpdateState={(item) => this.setPakLayoutState(item)}/> : null}</div>
                     <div>{this.state.pakChosen === true && this.state.sessionChosen === true ?
-                        <PromptBloksComponent/> : null}</div>
-                    <div>4</div>
+                        <PromptBloksComponent props={this.state} Carousel={this.Carousel}
+                                              parentUpdateState={(item) => this.setPakLayoutState(item)}/> : null}</div>
+                    <div>{this.state.pakChosen === true && this.state.sessionChosen === true && this.state.blockChosen === true && this.state.promptChosen === true ?
+                        <BranchComponent props={this.state} Carousel={this.Carousel}
+                                              parentUpdateState={(item) => this.setPakLayoutState(item)}/> : null}</div>
+
                 </Carousel>
             </Card>
 

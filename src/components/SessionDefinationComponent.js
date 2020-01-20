@@ -1,6 +1,5 @@
 import React from 'react';
-import {Card, Collapse, Icon, Input, List, Select,Button} from "antd";
-import Carousel from "react-multi-carousel";
+import {Card, Collapse, Icon, Input, List, Select} from "antd";
 
 const {Option} = Select;
 
@@ -10,13 +9,20 @@ const {Panel} = Collapse;
 
 export class SessionDefinitionComponent extends React.Component {
 
-    chooseSession(item,i){
+    // state={
+    //     sessionInfo:this.props.props.pakInfo.sessionInfo
+    // }
+    chooseSession(item, i) {
         this.props.Carousel.goToSlide(i)
+        // this.setState(item)
         this.props.parentUpdateState({
-            sessionChosen:true,
-            sessionInfo:item
+            sessionChosen: true,
+            blockChosen:false,
+            promptChosen:false,
+            sessionInfo: item
         })
     }
+
     render() {
         return (
             <Card style={{height: "80vh", textAlign: "left", flex: "1 1 auto", overflowY: "auto"}}>
@@ -37,34 +43,68 @@ export class SessionDefinitionComponent extends React.Component {
                             expandIconPosition={"right"}
 
                         >
-                            {this.props.props.pakChosen === true ? this.props.props.pakInfo.sessionInfo.map((session, i) =>
-                                <Panel key={i} header={session.title} extra={<Icon
-                                    type="plus"
-                                />}>
-                                    {console.log(session)}
-                                    {session.blockInfo.length > 0 ?
-                                        <List
-                                            style={{marginTop: "10px"}}
-                                            itemLayout="horizontal"
-                                            dataSource={session.blockInfo}
-                                            bordered={true}
-                                            renderItem={(item) => (
-                                                <List.Item  onClick={()=>this.chooseSession(session,1)}>
-                                                    <List.Item.Meta
-                                                        title={item.title}
-                                                        // description={item.status + " | " + item.author}
+                            <Panel key={1} header="Startup Session"extra={<Icon type="plus"/>}>
 
-                                                    />
-                                                    <Icon type="delete"/>
-                                                    <Icon style={{fontSize: '22px'}} type="step-forward"/>
-                                                </List.Item>
+                                <List
+                                    style={{marginTop: "10px"}}
+                                    itemLayout="horizontal"
+                                    dataSource={this.props.props.pakChosen === true ? this.props.props.pakInfo.sessionInfo.filter(session => session["type"] === "SUS") : null}
+                                    bordered={true}
+                                    renderItem={(item, i) => (
+                                        <List.Item key={i} onClick={() => this.chooseSession(item, 1)}>
+                                            <List.Item.Meta
+                                                title={item.title}
+                                                // description={item.status + " | " + item.author}
 
-                                            )}
-                                        />
-                                        : null}
+                                            />
+                                            <Icon type="delete"/>
+                                            <Icon style={{fontSize: '22px'}} type="step-forward"/>
+                                        </List.Item>
 
-                                </Panel>
-                            ) : null}
+                                    )}
+                                />
+                            </Panel>
+                            <Panel key={2} header="Notification Initiated Session (NIS)"extra={<Icon type="plus"/>}>
+                                <List
+                                    style={{marginTop: "10px"}}
+                                    itemLayout="horizontal"
+                                    dataSource={this.props.props.pakChosen === true ? this.props.props.pakInfo.sessionInfo.filter(session => session["type"] === "NIS") : null}
+                                    bordered={true}
+                                    renderItem={(item, i) => (
+                                        <List.Item key={i} onClick={() => this.chooseSession(item, 1)}>
+                                            <List.Item.Meta
+                                                title={item.title}
+                                                // description={item.status + " | " + item.author}
+
+                                            />
+                                            <Icon type="delete"/>
+                                            <Icon style={{fontSize: '22px'}} type="step-forward"/>
+                                        </List.Item>
+
+                                    )}
+                                />
+                            </Panel>
+                            <Panel key={3} header="User Initiated Session (UIS)"extra={<Icon type="plus"/>}>
+                                <List
+                                    style={{marginTop: "10px"}}
+                                    itemLayout="horizontal"
+                                    dataSource={this.props.props.pakChosen === true ? this.props.props.pakInfo.sessionInfo.filter(session => session["type"] === "UIS") : null}
+                                    bordered={true}
+                                    renderItem={(item, i) => (
+                                        <List.Item key={i} onClick={() => this.chooseSession(item, 1)}>
+                                            <List.Item.Meta
+                                                title={item.title}
+                                                // description={item.status + " | " + item.author}
+
+                                            />
+                                            <Icon type="delete"/>
+                                            <Icon style={{fontSize: '22px'}} type="step-forward"/>
+                                        </List.Item>
+
+                                    )}
+                                />
+                            </Panel>
+
 
                         </Collapse>
                     </div>
@@ -75,3 +115,32 @@ export class SessionDefinitionComponent extends React.Component {
         );
     }
 }
+
+// {this.props.props.pakChosen === true ? this.props.props.pakInfo.sessionInfo.map((session, i) =>
+//                                 <Panel key={i} header={session.title} extra={<Icon
+//                                     type="plus"
+//                                 />}>
+//                                     {console.log(session)}
+//                                     {session.blockInfo.length > 0 ?
+//                                         <List
+//                                             style={{marginTop: "10px"}}
+//                                             itemLayout="horizontal"
+//                                             dataSource={session.blockInfo}
+//                                             bordered={true}
+//                                             renderItem={(item) => (
+//                                                 <List.Item  onClick={()=>this.chooseSession(session,1)}>
+//                                                     <List.Item.Meta
+//                                                         title={item.title}
+//                                                         // description={item.status + " | " + item.author}
+//
+//                                                     />
+//                                                     <Icon type="delete"/>
+//                                                     <Icon style={{fontSize: '22px'}} type="step-forward"/>
+//                                                 </List.Item>
+//
+//                                             )}
+//                                         />
+//                                         : null}
+//
+//                                 </Panel>
+//                             ) : null}
